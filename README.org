@@ -5,14 +5,14 @@
 #+STARTUP: overview
 #+OPTIONS: toc:3 num:t
 
+[[./assets/header/readme-header.jpg]]
+
 * Workshop Overview
 :PROPERTIES:
 :header-args:python: :session citations :results output
 :END:
 
 Our focus is on leveraging Anthropic's Citations API for robust RAG systems.
-
-[[./assets/logo.jpg]]
 
 ** System Architecture
 #+begin_src mermaid
