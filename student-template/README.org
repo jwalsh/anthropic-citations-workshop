@@ -1,0 +1,8 @@
+#+TITLE: Student Workspace Template
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Structure
+- =exercises/= :: Workshop exercises
+- =notes/= :: Personal notes and observations
+- =solutions/= :: Exercise solutions
+- =module_template/= :: Custom module development

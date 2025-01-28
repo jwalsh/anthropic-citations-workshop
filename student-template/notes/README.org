@@ -1,0 +1,7 @@
+#+TITLE: Workshop Notes
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Notes Organization
+- Use one file per topic
+- Include code snippets with org-babel
+- Tag sections appropriately

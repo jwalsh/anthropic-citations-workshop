@@ -1,0 +1,35 @@
+#+TITLE: RAG with Citations Exercise
+#+PROPERTY: header-args:python :session *python* :results output
+
+* Exercise: Implementing RAG with Citations
+** Problem Description
+Implement a RAG system that uses Anthropic's Citations API.
+
+** Starting Code
+#+begin_src python
+from modules.citations_helper import process_citations
+
+def implement_rag(documents, query):
+    """
+    Implement RAG with citations.
+    
+    Args:
+        documents: List of documents to search
+        query: User query
+        
+    Returns:
+        Response with citations
+    """
+    # Your implementation here
+    pass
+
+#+end_src
+
+** Test Cases
+#+begin_src python :tangle test_rag.py
+def test_rag_implementation():
+    documents = ["Sample document one.", "Sample document two."]
+    query = "What do the documents say?"
+    result = implement_rag(documents, query)
+    assert result is not None
+#+end_src

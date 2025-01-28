@@ -239,3 +239,16 @@ make deps
 # Run tests
 make test
 #+end_src
+
+* Directory Structure
+See [[file:docs/STRUCTURE.org][detailed structure documentation]].
+
+* Module Documentation
+See [[file:docs/modules/README.org][modules documentation]].
+
+* Getting Started
+1. Clone repository
+2. Run setup: =make setup=
+3. Install dependencies: =make deps=
+4. Validate environment: =make validate-env=
+5. Start with notebooks: =notebooks/00_environment_check.org=

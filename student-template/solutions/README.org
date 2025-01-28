@@ -1,0 +1,7 @@
+#+TITLE: Exercise Solutions
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Solutions Structure
+- Solutions should include explanations
+- Use org-babel for runnable code
+- Include test results

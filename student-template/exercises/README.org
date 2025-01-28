@@ -1,0 +1,9 @@
+#+TITLE: Workshop Exercises
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Exercise Structure
+Each exercise includes:
+- Problem description
+- Starting code
+- Test cases
+- Submission instructions

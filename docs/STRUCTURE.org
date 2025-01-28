@@ -1,0 +1,161 @@
+#+TITLE: Anthropic Citations API Workshop Structure
+#+AUTHOR: Workshop Facilitator
+#+EMAIL: facilitator@example.com
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+#+STARTUP: overview
+#+OPTIONS: toc:3 num:t
+
+* Workshop Organization :meta:
+:PROPERTIES:
+:VISIBILITY: all
+:END:
+
+** Directory Structure Overview
+
+*** Data Management :data:
+- =data/raw/= :: Original source documents
+- =data/interim/= :: Intermediate processing results
+- =data/processed/= :: Final processed datasets
+
+*** Documentation :docs:
+- =docs/handouts/= :: Student materials and guides
+- =docs/references/= :: Additional reading materials
+- =docs/slides/= :: Presentation materials
+- =docs/modules/= :: Module documentation
+
+*** Development :dev:
+- =lib/= :: Shared utilities and constants
+- =modules/= :: Core functionality modules
+- =tests/= :: Test suites and fixtures
+
+*** Student Resources :student:
+- =exercises/= :: Workshop exercises
+- =notebooks/= :: Interactive org-mode notebooks
+- =student-template/= :: Workspace templates
+
+* Conventions :conventions:
+
+** File Organization
+*** Naming Conventions
+- Exercises :: =XX_topic_name.org= (e.g., =01_basic_citations.org=)
+- Tests :: =test_module_name.py= (e.g., =test_core.py=)
+- Notebooks :: =XX_topic_name.org= (e.g., =00_environment_check.org=)
+
+*** Documentation Format
+#+begin_src org
+,* Topic Title
+,** Overview
+Brief description
+
+,** Usage
+Code examples
+
+,** Notes
+Additional information
+#+end_src
+
+** Code Organization
+*** Python Modules
+#+begin_src python
+"""Module docstring."""
+
+from typing import List, Dict, Optional
+
+def function_name(param: type) -> return_type:
+    """Function docstring."""
+    pass
+#+end_src
+
+*** Test Structure
+#+begin_src python
+"""Test module docstring."""
+
+import pytest
+from module import function
+
+def test_function_name():
+    """Test docstring."""
+    pass
+#+end_src
+
+* Development Workflow :workflow:
+
+** Setup Process
+1. Clone repository
+2. Run make setup
+3. Install dependencies
+4. Verify environment
+
+** Development Cycle
+1. Create feature branch
+2. Implement changes
+3. Run tests
+4. Submit PR
+
+** Testing Guidelines
+- Write tests first
+- Use descriptive names
+- Include edge cases
+
+* Student Workflow :student:
+
+** Initial Setup
+1. Fork repository
+2. Create workspace
+3. Configure environment
+4. Verify installation
+
+** Exercise Workflow
+1. Read exercise description
+2. Implement solution
+3. Run tests
+4. Submit for review
+
+* Module Documentation :modules:
+
+** Citations Helper
+*** Core Functionality
+- Process citations
+- Extract quotes
+- Validate responses
+
+*** Usage Examples
+#+begin_src python
+from modules.citations_helper import process_citations
+
+result = process_citations(response)
+#+end_src
+
+* Exercise Structure :exercises:
+
+** Format
+#+begin_src org
+,* Exercise Title
+,** Problem Description
+Task details
+
+,** Starting Code
+Code template
+
+,** Test Cases
+Test examples
+#+end_src
+
+** Submission Format
+#+begin_src org
+,* Solution
+,** Implementation
+Solution code
+
+,** Explanation
+Approach description
+
+,** Test Results
+Test output
+#+end_src
+
+* Local Variables :noexport:
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# org-src-preserve-indentation: t
+# End:

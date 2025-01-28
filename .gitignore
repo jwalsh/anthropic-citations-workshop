@@ -88,3 +88,85 @@ backup/
 *.bak
 *.backup
 *.old
+
+# Org-mode specific
+.org-id-locations
+*_archive
+*.org~
+.org-id-locations
+*.org#
+
+# Student workspace
+student-notes/**/personal/
+student-notes/**/private/
+
+# Build artifacts
+*.elc
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env*
+!.env.example
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+\#*\#
+.\#*
+
+# Org-mode specific
+.org-id-locations
+*_archive
+*.org~
+.org-id-locations
+*.org#
+
+# Student workspace
+student-notes/**/personal/
+student-notes/**/private/
+
+# Build artifacts
+*.elc
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env*
+!.env.example
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+\#*\#
+.\#*

@@ -1,0 +1,18 @@
+#+TITLE: Workshop Modules Documentation
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Citations Helper Module
+** Overview
+Core functionality for working with Anthropic's Citations API
+
+** Components
+- =core.py= :: Main citation processing functions
+- =__init__.py= :: Module initialization and exports
+
+** Usage Examples
+#+begin_src python
+from modules.citations_helper import process_citations
+
+# Process citations from response
+result = process_citations(response)
+#+end_src
