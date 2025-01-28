@@ -13,9 +13,3 @@ Used in:
 - Repository social preview
 - Documentation
 - Workshop materials
-
-## Header Images
-- `header/readme-header.jpg`: Compact header (960x240px)
-  - Used in README.md
-  - Optimized for vertical space
-  - Maintains brand identity
