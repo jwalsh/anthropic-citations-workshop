@@ -12,6 +12,8 @@
 
 Our focus is on leveraging Anthropic's Citations API for robust RAG systems.
 
+[[./assets/logo.jpg]]
+
 ** System Architecture
 #+begin_src mermaid
 graph TB
