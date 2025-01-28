@@ -1,0 +1,16 @@
+#+TITLE: Workshop Documentation Index
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Workshop Documentation
+
+** Setup
+- [[file:setup/installation.org][Installation Guide]]
+- [[file:setup/configuration.org][Configuration Guide]]
+
+** Modules
+- [[file:modules/citations.org][Citations Module]]
+- [[file:modules/processing.org][Processing Module]]
+
+** Exercises
+- [[file:exercises/basic.org][Basic Exercises]]
+- [[file:exercises/advanced.org][Advanced Exercises]]

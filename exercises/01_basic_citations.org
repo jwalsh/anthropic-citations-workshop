@@ -1,0 +1,28 @@
+#+TITLE: Basic Citations Exercise
+#+PROPERTY: header-args:python :session *python* :results output
+
+* Exercise 1: Basic Citation Processing
+:PROPERTIES:
+:header-args: :tangle exercise1.py
+:END:
+
+Write code to process a basic citation response:
+
+#+begin_src python
+import anthropic
+from modules.citations_helper import process_citations
+
+def get_citation(text, query):
+    """Get citations for a given query."""
+    pass  # Implement this
+
+#+end_src
+
+* Solution
+:PROPERTIES:
+:header-args: :tangle solution1.py
+:END:
+
+#+begin_src python :tangle no
+# Solution will be provided during workshop
+#+end_src

@@ -1,0 +1,8 @@
+workshop:
+  name: Anthropic Citations API
+  version: '1.0.0'
+  python_version: '3.13'
+  dependencies:
+    - anthropic>=0.8.0
+    - jupyter>=1.0.0
+    - rich>=13.0.0

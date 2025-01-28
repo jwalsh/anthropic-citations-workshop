@@ -1,0 +1,22 @@
+#+TITLE: Environment Check
+#+PROPERTY: header-args:python :session *python* :results output
+
+* Environment Verification
+:PROPERTIES:
+:header-args: :tangle env_check.py
+:END:
+
+#+begin_src python
+import sys
+import anthropic
+import rich
+
+print(f"Python version: {sys.version}")
+print(f"Anthropic SDK version: {anthropic.__version__}")
+print(f"Rich version: {rich.__version__}")
+#+end_src
+
+* Next Steps
+1. Run environment check
+2. Configure API key
+3. Test basic citation query

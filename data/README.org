@@ -1,0 +1,6 @@
+#+TITLE: Workshop Data Files
+
+This directory contains sample data files for the workshop exercises:
+- sample_documents/: Example documents for citation extraction
+- test_cases/: Test cases for validation
+- results/: Generated results (gitignored)

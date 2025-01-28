@@ -1,0 +1,9 @@
+# Pair notebooks with markdown
+formats = ["ipynb,md"]
+
+# Version control friendly
+notebook_metadata_filter = "all"
+cell_metadata_filter = "-all"
+
+# Default notebook format
+default_format = ".md"

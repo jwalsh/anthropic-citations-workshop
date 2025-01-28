@@ -217,3 +217,25 @@ default_format = ".md"
 # End:
 #+end_src
 
+
+* Directory Structure
+- =docs/= - Documentation and guides
+- =modules/= - Core functionality
+- =exercises/= - Workshop exercises
+- =tests/= - Test suite
+- =data/= - Sample data files
+- =lib/= - Shared utilities
+- =notebooks/= - Interactive notebooks
+- =student-template/= - Student workspace template
+
+* Development Setup
+#+begin_src shell
+# Create virtual environment
+make setup
+
+# Install dependencies
+make deps
+
+# Run tests
+make test
+#+end_src

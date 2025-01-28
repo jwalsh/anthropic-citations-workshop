@@ -1,0 +1,18 @@
+#+TITLE: Workshop Documentation
+#+AUTHOR: Workshop Facilitator
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+
+* Documentation Structure
+- slides/: Presentation materials
+- handouts/: Student materials
+- references/: Additional reading
+
+* Quick Start
+:PROPERTIES:
+:header-args: :tangle quickstart.sh
+:END:
+
+#+begin_src bash
+source venv/bin/activate
+make validate-env
+#+end_src
