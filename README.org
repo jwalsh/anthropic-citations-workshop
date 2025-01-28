@@ -1,0 +1,219 @@
+#+TITLE: Anthropic Citations API Workshop
+#+AUTHOR: Workshop Facilitator
+#+EMAIL: facilitator@example.com
+#+PROPERTY: header-args :tangle yes :mkdirp yes
+#+STARTUP: overview
+#+OPTIONS: toc:3 num:t
+
+* Workshop Overview :workshop:
+:PROPERTIES:
+:DATES: January 2025
+:TOPIC: Anthropic Citations API
+:END:
+
+This workshop explores Anthropic's Citations API, focusing on RAG applications
+and practical implementation patterns.
+
+** Goals
+- Understand Citations API functionality
+- Implement RAG with citations
+- Build collaborative applications
+- Share and version control notebooks
+
+** Structure
+- Morning: Theory and API Introduction
+- Afternoon: Hands-on Implementation
+- Evening: Group Projects
+
+* Environment Setup :setup:
+
+** Makefile Configuration
+:PROPERTIES:
+:header-args: :tangle Makefile :mkdirp yes
+:END:
+
+#+begin_src makefile
+.PHONY: all setup venv deps student-workspace clean
+
+PYTHON=python3.13
+VENV=venv
+WORKSHOP_NAME=anthropic-citations-api
+YEAR=2025
+
+all: setup deps
+
+setup: venv
+	@echo "Setting up workshop environment..."
+
+venv:
+	$(PYTHON) -m venv $(VENV)
+	. $(VENV)/bin/activate && \
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+
+deps: venv
+	. $(VENV)/bin/activate && \
+	uv pip install anthropic jupyter pandas rich jupytext nbconvert
+
+student-workspace:
+	@read -p "Enter student name: " name; \
+	./scripts/create-student-workspace.sh "$$name"
+
+clean:
+	rm -rf $(VENV)
+	find . -type d -name "__pycache__" -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
+#+end_src
+
+** Student Workspace Script
+:PROPERTIES:
+:header-args: :tangle scripts/create-student-workspace.sh :mkdirp yes :shebang "#!/bin/bash"
+:END:
+
+#+begin_src bash
+set -euo pipefail
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 [student-name]"
+    exit 1
+fi
+
+STUDENT_NAME=$1
+WORKSPACE_DIR="student-notes/${STUDENT_NAME}"
+
+# Create directory structure
+mkdir -p "${WORKSPACE_DIR}"/{notebooks,exercises,solutions}
+
+# Create student config
+cat > "${WORKSPACE_DIR}/config.yml" << EOF
+student:
+  name: ${STUDENT_NAME}
+  created: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+workshop:
+  name: Anthropic Citations API
+  year: 2025
+EOF
+
+# Create git branch
+git checkout -b "student/${STUDENT_NAME}"
+
+# Initialize notebooks with jupytext
+cat > "${WORKSPACE_DIR}/notebooks/01_introduction.md" << EOF
+---
+jupyter:
+  jupytext:
+    formats: ipynb,md
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.14.5
+---
+
+# Introduction to Citations API
+
+## Setup Verification
+
+\`\`\`python
+import anthropic
+import os
+from rich import print
+
+# Verify environment
+print("Environment Check:")
+print(f"Python Version: {sys.version}")
+print(f"Anthropic SDK Version: {anthropic.__version__}")
+\`\`\`
+EOF
+
+echo "Student workspace created at ${WORKSPACE_DIR}"
+echo "Git branch student/${STUDENT_NAME} created"
+#+end_src
+
+** Jupytext Configuration
+:PROPERTIES:
+:header-args: :tangle .jupytext.toml :mkdirp yes
+:END:
+
+#+begin_src toml
+# Pair notebooks with markdown
+formats = ["ipynb,md"]
+
+# Version control friendly
+notebook_metadata_filter = "all"
+cell_metadata_filter = "-all"
+
+# Default notebook format
+default_format = ".md"
+#+end_src
+
+* Workshop Modules :modules:
+
+** Module 1: API Introduction
+- Citations API Overview
+- Basic Usage Patterns
+- Response Structure
+
+** Module 2: RAG Implementation
+- Document Processing
+- Citation Extraction
+- Response Generation
+
+** Module 3: Collaborative Features
+- Sharing Notebooks
+- Version Control
+- Group Projects
+
+* Student Instructions :students:
+
+** Initial Setup
+1. Fork repository
+2. Clone your fork
+3. Run make commands:
+   #+begin_src shell
+   make setup
+   make deps
+   make student-workspace  # Enter your name when prompted
+   #+end_src
+
+** Daily Workflow
+1. Update from upstream
+2. Work in your workspace
+3. Commit with topic tags
+4. Push to your fork
+
+** Collaboration
+1. Use jupytext for notebooks
+2. Share via pull requests
+3. Tag discussions appropriately
+
+* Development Notes :dev:
+:PROPERTIES:
+:header-args: :tangle DEVELOPMENT.md :mkdirp yes
+:END:
+
+#+begin_src markdown
+# Development Guidelines
+
+## Code Style
+- Use Black for Python formatting
+- Follow Google Python Style Guide
+- Document all functions
+
+## Git Workflow
+1. Create feature branch
+2. Develop and test
+3. Submit PR
+4. Request review
+
+## Environment
+- Python 3.13
+- Virtual environment
+- UV package manager
+#+end_src
+
+* Local Variables :noexport:
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# End:
+#+end_src
+
