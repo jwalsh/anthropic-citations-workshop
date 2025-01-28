@@ -1,254 +1,198 @@
 #+TITLE: Anthropic Citations API Workshop
 #+AUTHOR: Workshop Facilitator
 #+EMAIL: facilitator@example.com
-#+PROPERTY: header-args :tangle yes :mkdirp yes
+#+PROPERTY: header-args :tangle no :eval never-export
 #+STARTUP: overview
 #+OPTIONS: toc:3 num:t
 
-* Workshop Overview :workshop:
+* Workshop Overview
 :PROPERTIES:
-:DATES: January 2025
-:TOPIC: Anthropic Citations API
+:header-args:python: :session citations :results output
 :END:
 
-This workshop explores Anthropic's Citations API, focusing on RAG applications
-and practical implementation patterns.
+Our focus is on leveraging Anthropic's Citations API for robust RAG systems.
 
-** Goals
-- Understand Citations API functionality
-- Implement RAG with citations
-- Build collaborative applications
-- Share and version control notebooks
-
-** Structure
-- Morning: Theory and API Introduction
-- Afternoon: Hands-on Implementation
-- Evening: Group Projects
-
-* Environment Setup :setup:
-
-** Makefile Configuration
-:PROPERTIES:
-:header-args: :tangle Makefile :mkdirp yes
-:END:
-
-#+begin_src makefile
-.PHONY: all setup venv deps student-workspace clean
-
-PYTHON=python3.13
-VENV=venv
-WORKSHOP_NAME=anthropic-citations-api
-YEAR=2025
-
-all: setup deps
-
-setup: venv
-	@echo "Setting up workshop environment..."
-
-venv:
-	$(PYTHON) -m venv $(VENV)
-	. $(VENV)/bin/activate && \
-	curl -LsSf https://astral.sh/uv/install.sh | sh
-
-deps: venv
-	. $(VENV)/bin/activate && \
-	uv pip install anthropic jupyter pandas rich jupytext nbconvert
-
-student-workspace:
-	@read -p "Enter student name: " name; \
-	./scripts/create-student-workspace.sh "$$name"
-
-clean:
-	rm -rf $(VENV)
-	find . -type d -name "__pycache__" -exec rm -rf {} +
-	find . -type f -name "*.pyc" -delete
+** System Architecture
+#+begin_src mermaid
+graph TB
+    A[User Query] --> B[Citation Processor]
+    B --> C{Document Store}
+    C --> D[RAG Engine]
+    D --> E[Claude API]
+    E --> F[Citation Validator]
+    F --> G[Response Generator]
+    
+    subgraph "Citation Pipeline"
+        B
+        F
+        G
+    end
+    
+    subgraph "Knowledge Base"
+        C
+        D
+    end
 #+end_src
 
-** Student Workspace Script
+** Key Concepts :concepts:
+
+*** Citations in RAG Systems
+- Trace response lineage
+- Verify source accuracy
+- Enable fact-checking
+
+*** Embedding Integration
+#+begin_src mermaid
+sequenceDiagram
+    participant U as User
+    participant R as RAG System
+    participant E as Embedding Engine
+    participant C as Claude API
+    
+    U->>R: Query
+    R->>E: Generate Embeddings
+    E->>R: Vector Representations
+    R->>C: Context + Query
+    C->>R: Response with Citations
+    R->>U: Verified Response
+#+end_src
+
+* Interactive Examples :examples:
 :PROPERTIES:
-:header-args: :tangle scripts/create-student-workspace.sh :mkdirp yes :shebang "#!/bin/bash"
+:header-args:python: :session citations :results output
 :END:
 
-#+begin_src bash
-set -euo pipefail
-
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 [student-name]"
-    exit 1
-fi
-
-STUDENT_NAME=$1
-WORKSPACE_DIR="student-notes/${STUDENT_NAME}"
-
-# Create directory structure
-mkdir -p "${WORKSPACE_DIR}"/{notebooks,exercises,solutions}
-
-# Create student config
-cat > "${WORKSPACE_DIR}/config.yml" << EOF
-student:
-  name: ${STUDENT_NAME}
-  created: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
-workshop:
-  name: Anthropic Citations API
-  year: 2025
-EOF
-
-# Create git branch
-git checkout -b "student/${STUDENT_NAME}"
-
-# Initialize notebooks with jupytext
-cat > "${WORKSPACE_DIR}/notebooks/01_introduction.md" << EOF
----
-jupyter:
-  jupytext:
-    formats: ipynb,md
-    text_representation:
-      extension: .md
-      format_name: markdown
-      format_version: '1.3'
-      jupytext_version: 1.14.5
----
-
-# Introduction to Citations API
-
-## Setup Verification
-
-\`\`\`python
+** Environment Check
+#+begin_src python
+import sys
 import anthropic
-import os
-from rich import print
+from rich import print as rprint
 
-# Verify environment
-print("Environment Check:")
-print(f"Python Version: {sys.version}")
-print(f"Anthropic SDK Version: {anthropic.__version__}")
-\`\`\`
-EOF
-
-echo "Student workspace created at ${WORKSPACE_DIR}"
-echo "Git branch student/${STUDENT_NAME} created"
+rprint(f"[bold blue]Python Version:[/] {sys.version_info}")
+rprint(f"[bold blue]Anthropic SDK:[/] {anthropic.__version__}")
 #+end_src
 
-** Jupytext Configuration
+** Basic Citation Processing
+#+begin_src python
+def process_citation_response(response):
+    """Extract and validate citations from response."""
+    citations = []
+    for block in response.content:
+        if hasattr(block, 'citations'):
+            citations.extend(block.citations)
+    return citations
+
+# Example usage in REPL
+# response = client.messages.create(...)
+# citations = process_citation_response(response)
+#+end_src
+
+* Development Setup :setup:
+
+Use provided Makefile targets:
+
+#+begin_example
+make setup      # Initial environment setup
+make deps       # Install dependencies
+make validate   # Verify environment
+#+end_example
+
+* Workshop Topics :topics:
+
+** Citation Architecture
+#+begin_src mermaid
+classDiagram
+    class CitationProcessor {
+        +process_text()
+        +validate_sources()
+        +extract_quotes()
+    }
+    
+    class RAGEngine {
+        +embed_documents()
+        +retrieve_context()
+        +generate_response()
+    }
+    
+    class CitationValidator {
+        +verify_quotes()
+        +check_sources()
+        +validate_context()
+    }
+    
+    CitationProcessor --> RAGEngine
+    RAGEngine --> CitationValidator
+#+end_src
+
+** Advanced RAG Patterns
+Examples of sophisticated retrieval strategies.
+
+#+begin_src python
+def contextual_retrieval(query, documents, n_contexts=3):
+    """Advanced contextual retrieval with citations."""
+    # Implementation during workshop
+    pass
+#+end_src
+
+* Reading Notes :notes:
+
+** Key Papers
+- /Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks/ (2020)
+  - Core RAG concepts
+  - Citation integration patterns
+
+** Implementation Patterns
+- Vector store selection
+- Embedding strategies
+- Citation validation approaches
+
+* Workshop Flow
 :PROPERTIES:
-:header-args: :tangle .jupytext.toml :mkdirp yes
+:header-args:mermaid: :file workshop_flow.svg
 :END:
 
-#+begin_src toml
-# Pair notebooks with markdown
-formats = ["ipynb,md"]
-
-# Version control friendly
-notebook_metadata_filter = "all"
-cell_metadata_filter = "-all"
-
-# Default notebook format
-default_format = ".md"
+#+begin_src mermaid
+gantt
+    title Workshop Timeline
+    dateFormat  HH:mm
+    axisFormat %H:%M
+    
+    section Morning
+    Setup & Introduction     :09:00, 30m
+    Citations API Overview   :09:30, 45m
+    Hands-on Session 1      :10:15, 45m
+    
+    section Afternoon
+    Advanced RAG            :13:00, 60m
+    Implementation          :14:00, 90m
+    Integration Patterns    :15:30, 60m
 #+end_src
-
-* Workshop Modules :modules:
-
-** Module 1: API Introduction
-- Citations API Overview
-- Basic Usage Patterns
-- Response Structure
-
-** Module 2: RAG Implementation
-- Document Processing
-- Citation Extraction
-- Response Generation
-
-** Module 3: Collaborative Features
-- Sharing Notebooks
-- Version Control
-- Group Projects
-
-* Student Instructions :students:
-
-** Initial Setup
-1. Fork repository
-2. Clone your fork
-3. Run make commands:
-   #+begin_src shell
-   make setup
-   make deps
-   make student-workspace  # Enter your name when prompted
-   #+end_src
-
-** Daily Workflow
-1. Update from upstream
-2. Work in your workspace
-3. Commit with topic tags
-4. Push to your fork
-
-** Collaboration
-1. Use jupytext for notebooks
-2. Share via pull requests
-3. Tag discussions appropriately
 
 * Development Notes :dev:
 :PROPERTIES:
-:header-args: :tangle DEVELOPMENT.md :mkdirp yes
+:header-args:python: :session dev :results output
 :END:
 
-#+begin_src markdown
-# Development Guidelines
-
-## Code Style
-- Use Black for Python formatting
-- Follow Google Python Style Guide
-- Document all functions
-
-## Git Workflow
-1. Create feature branch
-2. Develop and test
-3. Submit PR
-4. Request review
-
-## Environment
-- Python 3.13
-- Virtual environment
-- UV package manager
+** Testing Strategies
+#+begin_src python
+def test_citation_validation():
+    """Example test pattern for citation validation."""
+    test_response = {
+        "citations": [
+            {"text": "sample citation", "source": "doc1"}
+        ]
+    }
+    # Full implementation during workshop
 #+end_src
+
+** Performance Considerations
+- Embedding cache strategies
+- Citation verification optimization
+- Response generation latency
 
 * Local Variables :noexport:
 # Local Variables:
 # org-confirm-babel-evaluate: nil
+# org-src-preserve-indentation: t
+# org-babel-python-command: "python3.13"
 # End:
-#+end_src
-
-
-* Directory Structure
-- =docs/= - Documentation and guides
-- =modules/= - Core functionality
-- =exercises/= - Workshop exercises
-- =tests/= - Test suite
-- =data/= - Sample data files
-- =lib/= - Shared utilities
-- =notebooks/= - Interactive notebooks
-- =student-template/= - Student workspace template
-
-* Development Setup
-#+begin_src shell
-# Create virtual environment
-make setup
-
-# Install dependencies
-make deps
-
-# Run tests
-make test
-#+end_src
-
-* Directory Structure
-See [[file:docs/STRUCTURE.org][detailed structure documentation]].
-
-* Module Documentation
-See [[file:docs/modules/README.org][modules documentation]].
-
-* Getting Started
-1. Clone repository
-2. Run setup: =make setup=
-3. Install dependencies: =make deps=
-4. Validate environment: =make validate-env=
-5. Start with notebooks: =notebooks/00_environment_check.org=

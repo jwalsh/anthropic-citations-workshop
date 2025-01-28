@@ -1,0 +1,40 @@
+classDiagram
+    class CitationProcessor {
+        +process_documents()
+        +extract_citations()
+        +validate_sources()
+        +generate_report()
+    }
+    
+    class RAGEngine {
+        +embed_documents()
+        +retrieve_context()
+        +rank_results()
+        +generate_response()
+    }
+    
+    class EmbeddingEngine {
+        +create_embeddings()
+        +update_index()
+        +search_similar()
+    }
+    
+    class DocumentStore {
+        +add_document()
+        +get_document()
+        +update_metadata()
+        +search_content()
+    }
+    
+    class CitationValidator {
+        +verify_quotes()
+        +check_sources()
+        +validate_context()
+        +generate_report()
+    }
+    
+    CitationProcessor --> RAGEngine
+    RAGEngine --> EmbeddingEngine
+    RAGEngine --> DocumentStore
+    CitationProcessor --> CitationValidator
+    DocumentStore --> CitationValidator
